@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 98%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 60 4.8% 95.9%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 60 4.8% 95.9%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+
+  /* Pokemon theme colors */
+  --pokered: 358 79% 51%;
+  --pokeblue: 227 55% 51%;
+  --pokeyellow: 50 100% 50%;
+  --pokegray: 210 17% 98%;
+  --pokedark: 210 11% 15%;
+}
+
+/* Dark mode specific styles */
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 207 90% 54%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  
+  /* Add better text contrast for dark mode */
+  --pokered: 358 79% 60%; /* Brighter red for dark mode */
+  --pokeblue: 227 70% 60%; /* Brighter blue for dark mode */
+  --pokeyellow: 50 100% 60%; /* Brighter yellow for dark mode */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background-color: hsl(var(--pokegray));
+  }
+}
+
+.shiny-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shiny-effect::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+  transform: rotate(45deg);
+  animation: shine 3s infinite;
+  z-index: 10;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.game-badge {
+  transition: transform 0.2s;
+}
+
+.game-badge:hover {
+  transform: scale(1.1);
+  z-index: 5;
+}
+
+.pokemon-card {
+  transition: all 0.3s ease;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Improved text contrast for all backgrounds */
+.text-on-dark {
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+}
+
+/* Better text readability on all backgrounds */
+.type-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.type-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  z-index: -1;
+}
+
+.type-badge:hover::before {
+  opacity: 1;
+}
+
+/* Improve contrast for text elements */
+.text-white {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Dark mode text improvements */
+.dark .card-content {
+  color: white;
+}
+
+.dark .pokemon-name {
+  color: white;
+  font-weight: 700;
+}
+
+/* Game method styles */
+.game-method-container {
+  border-left: 3px solid;
+  padding-left: 0.75rem;
+  margin: 0.5rem 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  padding: 0.75rem;
+  padding-right: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.dark .game-method-container {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.game-method-container:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.method-odds {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  color: hsl(var(--primary));
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+.method-time {
+  font-style: italic;
+  color: hsl(var(--muted-foreground));
+}
+
+.method-guide {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-top: 0.25rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+/* Custom card for game details - you can modify this later */
+.game-detail-card {
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  max-height: 0;
+}
+
+.game-detail-card.expanded {
+  max-height: 1000px; /* Adjust as needed */
+}
+
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite;
+}
